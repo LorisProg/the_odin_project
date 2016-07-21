@@ -1,2 +1,2 @@
-# the_odin_project
-Everything I've done for The Odin Project
+# The Odin Project
+I wil keep in this repository every project that I have done for The Odin Project.
