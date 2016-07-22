@@ -1,18 +1,18 @@
-var multiples = new Array();
+// Project Euler problem 1
+// function which calculates the sum of the multiples of integrer below a target
 
-for (i = 1; i < 1000; i++) {
-    if (i%5 === 0) {
-        multiples.push(i);
-    }
-    if (i%3 === 0 && i%5 !== 0) {
-        multiples.push(i);
-    }
-}
+var multipleSum = function(x, y, target) {
 
-var sum = 0;
+	var sum = 0;
+    var i = 0;
+	for (i = 1; i < target; i++) {
+    	if (i%x === 0) {
+        	sum += i;
+    	}
+    	else if (i%y === 0) {
+        	sum += i;
+    	}
+	}
+	return sum;
+};
 
-for (i = 0; i < multiples.length; i++) {
-    sum = sum + multiples[i];
-}
-
-console.log(sum);
