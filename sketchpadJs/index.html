@@ -8,10 +8,41 @@
 
 		<h2>Sketchpad made with JS</h2>
 
-		<button id="clear">Clear</button>
+		<div id="options">
+		<h4>Options :</h4>
+
+		<p class="colorPicker"><button
+				id="primary"
+    			class="jscolor {valueElement:null,value:'fff'}"
+    			style="border:2px solid black">
+    			Pick the Primary color
+			</button></br>
+			(Color updated after reset)
+			</p>
+
+		<p class="colorPicker"><button
+				id="secondary"
+    			class="jscolor {valueElement:null,value:'000'}"
+    			style="border:2px solid black">
+    			Pick the Secondary color
+			</button></br>
+			(Live update for next moves)
+			</p>
+
+		<p class="random">Or use random colors : <input type="checkbox" id="randomCheck" name="randomColors"></p>
+
+		<p class="opacity">10% opacity : <input type="checkbox" id="opacityCheck" name="opacity"></p>
+		<p class="hint">(This will reset the grid with the same size and disable the other options)</p>
+
+		<p class="gridInfo"></p>
+
+		<button id="clear">Reset</button>
+
+		</div>
 
 		<div class="container"></div>
 
+		<script src="jscolor.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<script type="text/javascript" src="script.js"></script>
 	</body>
