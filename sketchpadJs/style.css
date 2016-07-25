@@ -41,7 +41,7 @@ p {
 #clear {
 	position: absolute;
 	bottom: 10px;
-	left: 90px;
+	left: 70px;
 }
 
 .container {
@@ -61,4 +61,5 @@ li {
 	display: inline-block;
 	margin: 0;
 	padding: 0;
+	font-size: 0;
 }

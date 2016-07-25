@@ -7,9 +7,15 @@ $(document).ready(function() {
 	fillCont(gridSize);
 
 	$("#clear").click(function() {
-		clearCont();
+	
 		gridSize = prompt("Choose how many squares per side the new grid will be : (default 16)");
+		clearCont();
 		fillCont(gridSize);
+	});
+
+	$("#backColor").click(function () {
+		$("li").css("background-color", $("#primary").css("background-color"));
+		$("li").css("opacity", 1);
 	});
 
 
@@ -17,26 +23,17 @@ $(document).ready(function() {
 		colorize();
 	});
 
+
 	$("#opacityCheck").click(function() {
 		
-		$("#primary").css("background-color", "#fff")
-		$("#secondary").css("background-color", "#000")
-
-		$("#primary").toggleDisabled();
-		$("#secondary").toggleDisabled();
-		$("#randomCheck").prop("checked", false)
-		$("#randomCheck").toggleDisabled();
-
-		clearCont();
-		fillCont(gridSize);
-
-
 		if ($("#opacityCheck").prop("checked")) {
-
-			$("li").css("opacity", 0);
 			gradient(0.1);
 		}
-
+		else {
+			$("li").css("opacity", 1);
+			$("li").unbind("mouseenter");
+			colorize();
+		}
 	});
 
 });
@@ -44,6 +41,7 @@ $(document).ready(function() {
 
 var clearCont = function() {
 	$(".container").html("");
+	$(".gridInfo").html("");
 };
 
 var fillCont = function(size) {
@@ -55,20 +53,22 @@ var fillCont = function(size) {
 	var t0 = performance.now();
 
 	var i = 1;
-	var j = 1;
 
 	var grid = "";
+	var gridUl = "";
 
-	for (i = 1; i <= size; i++) {
+	gridUl = gridUl.concat("<ul>");
 
-		grid = grid.concat("<ul>");
-
-		for (j = 1; j <= size; j++) {
-			grid = grid.concat("<li></li>");
+		for (i = 1; i <= size; i++) {
+			gridUl = gridUl.concat("<li></li>");
 		}
 
-		grid = grid.concat("</ul>");
-	}
+	gridUl = gridUl.concat("</ul>");
+
+
+		for (i = 1; i <= size; i++) {
+			grid = grid.concat(gridUl);
+		}
 
 	$(".container").append(grid);
 
@@ -79,6 +79,8 @@ var fillCont = function(size) {
 
 	colorize();
 
+	$(".gridInfo").append("Current grid size : " + size + "X" + size);
+
 	var t1 = performance.now();
 	console.log("fillCont s'est execute en " + Math.floor(t1 - t0) + " millisecondes.");
 
@@ -88,12 +90,12 @@ var fillCont = function(size) {
 var colorize = function() {
 
 	if ($("#randomCheck").prop("checked")) {
-		$("li").hover(function() {
+		$("li").mouseenter(function() {
 		$(this).css("background-color", '#'+Math.floor(Math.random()*16777215).toString(16)	);
 		});
 	}
 	else {
-		$("li").hover(function() {
+		$("li").mouseenter(function() {
 		$(this).css("background-color", $("#secondary").css("background-color"));
 		});
 	}
@@ -103,25 +105,18 @@ var colorize = function() {
 
 var gradient = function(percentage) {
 
-	colorize();
+	$("li").unbind("mouseenter");
 
 
-	$("li").hover(function() {
+	$("li").mouseenter(function() {
+
+		if ($(this).css("background-color") !== $("#secondary").css("background-color")) {
+			$(this).css("opacity", 0);
+		}
 
 		$(this).css("opacity", (parseFloat($(this).css("opacity")) + percentage).toString());
 	});
 
+	colorize();
+
 };
-
-
-// toggleDisable funtction found here :
-// https://php.quicoto.com/how-to-toggle-disabled-with-jquery/
-// write by Ricard Torres
-
-(function($) {
-    $.fn.toggleDisabled = function(){
-        return this.each(function(){
-            this.disabled = !this.disabled;
-        });
-    };
-})(jQuery);
