@@ -55,6 +55,12 @@ var fillCont = function(size) {
 	var i = 1;
 
 	var grid = "";
+
+	grid = "<ul>" + ("<li></li>").repeat(size) + "</ul>";
+
+	grid = grid.repeat(size);
+
+	/*
 	var gridUl = "";
 
 	gridUl = gridUl.concat("<ul>");
@@ -69,6 +75,7 @@ var fillCont = function(size) {
 		for (i = 1; i <= size; i++) {
 			grid = grid.concat(gridUl);
 		}
+	*/
 
 	$(".container").append(grid);
 
